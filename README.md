@@ -1,14 +1,39 @@
-# Composer Template
+# Helper for Laravel Redis
 
-![tests](https://github.com/MilesChou/composer-template/workflows/tests/badge.svg)
-[![Use this template](https://img.shields.io/badge/GitHub-Use_this_template-green.svg)](https://github.com/MilesChou/composer-template/generate)
+![tests](https://github.com/104lab/laravel-redis/workflows/tests/badge.svg)
 
-The template for create Composer library.
+## Requirement
 
-Remember to remove or modify following information:
+* PHP 8.1 ~ 8.3
+* Laravel 10 ~ 11
+* ext-redis 5.3 ~ 6.0 (Test covered)
+* Redis 6 ~ 7 (Test covered)
 
-* [ ] Namespace in [`composer.json`](/composer.json) and files in [`src`](/src) or [`tests`](/tests) directories
-* [ ] Project name and description and author name in [`composer.json`](/composer.json)
-* [ ] Actions setting in [`tests.yml`](/.github/workflows/tests.yml)
-* [ ] The badge link and this checklist in [README.md](/README.md) file
-* [ ] Author in [LICENSE](/LICENSE) file
+## Installation
+
+Use Composer for install.
+
+```
+composer require 104lab/laravel-redis
+```
+
+## Usage
+
+Redis [`KEYS`](https://redis.io/docs/latest/commands/keys/) method is like full-table scan, so maybe use [`SCAN`](https://redis.io/docs/latest/commands/scan/) is good idea.
+
+```php
+$connection = Redis::connection();
+
+# Before
+$keys = $connection->keys('foo:*');
+
+# After
+$keys = (new KeysByScan($connection))('foo:*');
+
+# Use chunk limit
+$keys = (new KeysByScan($connection))('foo:*', 100);
+```
+
+## License
+
+The MIT License (MIT). Please see [License](LICENSE) File for more information.
