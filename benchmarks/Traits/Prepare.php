@@ -6,9 +6,16 @@ use Illuminate\Container\Container;
 use Illuminate\Redis\Connections\Connection;
 use Illuminate\Redis\RedisManager;
 use Illuminate\Support\Collection;
+use Redis;
 
-trait Init
+trait Prepare
 {
+    private int $chunk = 100;
+
+    private int $more = 10_000;
+
+    private int $less = 100;
+
     private ?Connection $connection = null;
 
     private array $keys = [];
@@ -33,21 +40,25 @@ trait Init
         );
     }
 
-    public function init(): void
+    private function init(int $foo, int $bar): void
     {
+        ini_set('memory_limit', -1);
+
         if ($this->connection === null) {
             $this->connection = $this->createRedisManager()->connection();
         }
 
         $this->connection->flushdb();
-        Collection::times(1_000, fn($num) => $this->connection->set("foo:$num", 1));
-        Collection::times(100, fn($num) => $this->connection->set("bar:$num", 1));
+        $this->connection->pipeline(function (Redis $pipe) use ($foo, $bar) {
+            Collection::times($foo, fn($num) => $pipe->set("foo:$num", 1));
+            Collection::times($bar, fn($num) => $pipe->set("bar:$num", 1));
+        });
     }
 
-    public function check(): void
+    private function check(int $foo): void
     {
         $count = count($this->keys);
 
-        assert($count === 1_000, 'Check error, expect is 100000, actual is ' . $count);
+        assert($count === $foo, "Check error, expect is $foo, actual is $count");
     }
 }

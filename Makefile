@@ -33,4 +33,8 @@ coverage: test
 
 .PHONY: bench
 bench:
-	php vendor/bin/phpbench run --report=overview benchmarks
+	php ${GLOBAL_CONFIG} -d xdebug.mode=off vendor/bin/phpbench run --report=overview benchmarks/FoundItemIsNone
+	php ${GLOBAL_CONFIG} -d xdebug.mode=off vendor/bin/phpbench run --report=overview benchmarks/FoundItemIsLess
+	php ${GLOBAL_CONFIG} -d xdebug.mode=off vendor/bin/phpbench run --report=overview benchmarks/FoundItemIsMore
+	php ${GLOBAL_CONFIG} -d xdebug.mode=off vendor/bin/phpbench run --report=overview benchmarks/FoundItemIsAll
+	php ${GLOBAL_CONFIG} -d xdebug.mode=off vendor/bin/phpbench run --report=overview benchmarks/Chunk
