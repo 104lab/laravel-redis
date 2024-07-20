@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  linux_tests:
+  tests:
     runs-on: ubuntu-latest
 
     strategy:
@@ -73,3 +73,7 @@ jobs:
 
       - name: Execute tests
         run: php vendor/bin/phpunit
+
+  bench:
+    needs: [tests]
+    uses: ./.github/workflows/bench.yml
