@@ -20,7 +20,7 @@ clean-all: clean
 
 .PHONY: check
 check: build
-	php ${GLOBAL_CONFIG} vendor/bin/phpcs --parallel=${PROCESSORS_NUM} --report-junit=build/phpcs.xml
+	php ${GLOBAL_CONFIG} vendor/bin/phpcs --report-junit=build/phpcs.xml
 
 .PHONY: test
 test: clean check
@@ -38,3 +38,7 @@ bench:
 	php ${GLOBAL_CONFIG} -d xdebug.mode=off vendor/bin/phpbench run --report=overview benchmarks/FoundItemIsMore
 	php ${GLOBAL_CONFIG} -d xdebug.mode=off vendor/bin/phpbench run --report=overview benchmarks/FoundItemIsAll
 	php ${GLOBAL_CONFIG} -d xdebug.mode=off vendor/bin/phpbench run --report=overview benchmarks/Chunk
+
+.PHONY: up
+up:
+	docker-compose up -d

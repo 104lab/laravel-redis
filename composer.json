@@ -21,7 +21,7 @@
         "illuminate/container": "^10 | ^11",
         "illuminate/redis": "^10 | ^11",
         "phpbench/phpbench": "^1.0",
-        "phpunit/phpunit": "^9.6 | ^10",
+        "phpunit/phpunit": "^10.1 | ^11",
         "squizlabs/php_codesniffer": "^3.7",
         "symfony/var-dumper": "*"
     },
