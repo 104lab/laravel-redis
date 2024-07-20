@@ -59,7 +59,7 @@ jobs:
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ matrix.php }}-${{ matrix.laravel }}-${{ matrix.stability }}-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          restore-keys: composer-
 
       - name: Install dependencies
         uses: nick-fields/retry@v3

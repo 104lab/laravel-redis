@@ -52,7 +52,7 @@ jobs:
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: composer-
 
       - name: Install dependencies
         uses: nick-fields/retry@v3
