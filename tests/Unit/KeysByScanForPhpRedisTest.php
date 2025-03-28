@@ -11,7 +11,7 @@ use Lab104\Laravel\Redis\KeysByScan;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class KeysByScanTest extends TestCase
+class KeysByScanForPhpRedisTest extends TestCase
 {
     private function createRedisManager(): RedisManager
     {
@@ -47,7 +47,7 @@ class KeysByScanTest extends TestCase
         $connection->set('bar:foo:8', '8');
     }
 
-    private Connection $connection;
+    private ?Connection $connection;
 
     protected function setUp(): void
     {
@@ -60,6 +60,8 @@ class KeysByScanTest extends TestCase
 
     protected function tearDown(): void
     {
+        $this->connection = null;
+
         parent::tearDown();
     }
 

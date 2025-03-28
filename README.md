@@ -32,6 +32,9 @@ $keys = (new KeysByScan($connection))('foo:*');
 
 # Use chunk limit
 $keys = (new KeysByScan($connection))('foo:*', 100);
+
+# Use usleep, default is 10
+$keys = (new KeysByScan($connection))('foo:*', 100, 10);
 ```
 
 ## License
