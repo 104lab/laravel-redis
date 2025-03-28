@@ -21,7 +21,7 @@
         "ext-redis": "*",
         "illuminate/container": "^10 | ^11 | ^12",
         "phpbench/phpbench": "^1.0",
-        "phpeunit/phpunit": "^10.1 | ^11",
+        "phpunit/phpunit": "^9 | ^10 | ^11",
         "predis/predis": "^2.0.3",
         "squizlabs/php_codesniffer": "^3.12"
     },
